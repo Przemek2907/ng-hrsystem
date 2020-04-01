@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {AuthService} from '../../security/AuthService';
 import {Router} from '@angular/router';
+import {FormControl, FormGroup} from '@angular/forms';
+import {AuthenticatingUser} from '../../model/AuthenticatingUser';
 
 
 @Component({
@@ -9,18 +11,22 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  private username: string;
-  private password: string;
+   userLoginForm: FormGroup = new FormGroup({
+     username: new FormControl(''),
+     password: new FormControl('')
+   });
 
   constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    if (this.username && this.password) {
-      this.authService.login(this.username, this.password)
+    if (this.userLoginForm.value) {
+      const userLoginData: AuthenticatingUser = Object.assign({}, this.userLoginForm.value);
+      this.authService.login(userLoginData.username, userLoginData.password)
         .subscribe(
           () => this.router.navigate(['dashboard']),
           (error) => console.log(error),
         );
+      this.userLoginForm.reset();
     }
   }
 
@@ -30,7 +36,5 @@ export class LoginComponent {
 
   logout() {
     this.authService.logout();
-    this.username = '';
-    this.password = '';
   }
 }

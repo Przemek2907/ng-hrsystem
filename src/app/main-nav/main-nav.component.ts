@@ -15,7 +15,6 @@ import {LoginComponent} from '../components/login/login.component';
 export class MainNavComponent {
   faPowerOff = faPowerOff;
   faUser = faUser;
-  userCredentials: LoginComponent;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

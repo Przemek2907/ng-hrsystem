@@ -22,12 +22,10 @@ export  class AuthService {
 
   private setSession(authResult) {
     localStorage.setItem('token', authResult.data);
-    // localStorage.setItem('expires_at', authResult.expirationDate);
   }
 
   logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('expires_at');
   }
 
   isUserLoggedIn(): boolean {
