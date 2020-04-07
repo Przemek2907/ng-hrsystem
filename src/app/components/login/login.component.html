@@ -1,10 +1,10 @@
 <div class="wrapper" *ngIf="!isLoggedIn()">
-<form class="login-form" [formGroup]="userLoginForm">
+<form class="login-form" [formGroup]="userLoginForm" (ngSubmit)="login()">
   <h2>Security login form</h2>
   <p>Here you can log in securly test test to  Application. Form written with the use of Flexbox</p>
   <input type = "text" placeholder="email" formControlName="username">
   <input type = "password" placeholder="password" formControlName="password"/>
-  <button (click)="login()">Login</button>
+  <button>Login</button>
 </form>
 </div>
 

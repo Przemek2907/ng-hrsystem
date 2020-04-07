@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../security/AuthService';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup} from '@angular/forms';
@@ -10,13 +10,17 @@ import {AuthenticatingUser} from '../../model/AuthenticatingUser';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
-   userLoginForm: FormGroup = new FormGroup({
-     username: new FormControl(''),
-     password: new FormControl('')
-   });
+export class LoginComponent implements OnInit{
+   userLoginForm: FormGroup;
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.userLoginForm = new FormGroup({
+      username: new FormControl(),
+      password: new FormControl()
+    });
+  }
 
   login() {
     if (this.userLoginForm.value) {
